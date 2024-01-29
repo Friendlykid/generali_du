@@ -26,7 +26,7 @@ export default function SelectInput({ selected, setSelected }) {
   return (
     <>
       <div onClick={handleClick}>
-        <Stack direction="row" gap="0" width="100%" height="25px">
+        <Stack direction="row" gap="0" width="100%" height="25px" sx={{cursor:"pointer"}}>
           <Box
             sx={{ border: "2px solid black", paddingLeft: "2px", flex: "1" }}
           >
