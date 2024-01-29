@@ -23,16 +23,16 @@ export default function Form({ newPolicy }) {
       bgcolor="#f2f2f2"
       direction="column"
       p={3}
-      gap={1}
+      gap={0.5}
       color="black"
       width="250px"
     >
       <Typography variant="h4">New policy</Typography>
-      <Typography variant="body2">Insurance type</Typography>
+      <Typography variant="body2" pl="1px">Insurance type</Typography>
       <SelectInput selected={insuranceType} setSelected={setInsuranceType} />
-      <Typography variant="body2">Name</Typography>
+      <Typography variant="body2" pl="1px">Name</Typography>
       <Input id="select-name" value={name} setValue={setName} type="name" />
-      <Typography variant="body2">Surname</Typography>
+      <Typography variant="body2" pl="1px">Surname</Typography>
       <Input
         id="select-surname"
         value={surname}

@@ -26,7 +26,7 @@ export default function SelectInput({ selected, setSelected }) {
   return (
     <>
       <div onClick={handleClick}>
-        <Stack direction="row" gap="0" width="100%" height="30px">
+        <Stack direction="row" gap="0" width="100%" height="25px">
           <Box
             sx={{ border: "2px solid black", paddingLeft: "2px", flex: "1" }}
           >
@@ -43,14 +43,7 @@ export default function SelectInput({ selected, setSelected }) {
               >
                 <g id="Layer_1">
                   <title>Layer 1</title>
-                  <path
-                    stroke="#000"
-                    strokeWidth="2"
-                    id="svg_1"
-                    d="m3.42367,3.12049l8.59194,18.5073l8.91063,-18.59347l-17.50257,0.08617z"
-                    opacity="NaN"
-                    fill="none"
-                  />
+                  <polygon points="6,5 18,5 12,17" style={{fill:"none",stroke:"black",strokeWidth:2}} />
                 </g>
               </svg>
             </SvgIcon>

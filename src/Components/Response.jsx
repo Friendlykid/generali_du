@@ -8,9 +8,9 @@ export default function Response({ response }) {
   return (
     <Box color="black">
       {response === 201 ? (
-        <Alert severity="success">Success! {response} code</Alert>
+        <Alert severity="success">Úspěšně uloženo</Alert>
       ) : (
-        <Alert severity="error">Something went wrong. {response} code</Alert>
+        <Alert severity="error">Neúspěšně uloženo</Alert>
       )}
     </Box>
   );

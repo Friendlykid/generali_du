@@ -18,7 +18,7 @@ export default function Input({ value, setValue, id, type }) {
       id={id}
       value={value}
       onChange={handleChange}
-      sx={{ border: "2px solid black", paddingLeft: "2px", height: "30px" }}
+      sx={{ border: "2px solid black", paddingLeft: "2px", height: "25px" }}
       autoComplete="off"
     ></InputBase>
   );
