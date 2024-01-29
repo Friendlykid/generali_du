@@ -1,9 +1,10 @@
 import { ThemeProvider, createTheme } from "@mui/material";
 import "./App.css";
-import { useState } from "react";
 import Form from "./Components/Form";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Response from "./Components/Response";
+import { useMutation } from "@tanstack/react-query";
+import createNewPolicy from "./utils/CreateNewPolicy";
 
 const theme = createTheme({
   palette: {
@@ -34,16 +35,21 @@ const theme = createTheme({
   },
 });
 function App() {
-  const [response, setResponse] = useState("preparing");
+  const newPolicy = useMutation({
+    mutationKey: ["policy"],
+    mutationFn: (insuranceType, name, surname, policyNumber) => {
+      return createNewPolicy(insuranceType, name, surname, policyNumber);
+    },
+  });
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Form newPolicy={newPolicy} />} />
           <Route
-            path="/"
-            element={<Form response={response} setResponse={setResponse} />}
+            path="/response"
+            element={<Response response={newPolicy.data} />}
           />
-          <Route path="/response" element={<Response response={response} />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

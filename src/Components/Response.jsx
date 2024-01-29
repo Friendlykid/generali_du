@@ -2,10 +2,9 @@ import { Alert, Box } from "@mui/material";
 import { Navigate } from "react-router-dom";
 
 export default function Response({ response }) {
-  if (response === "preparing") {
+  if (!response) {
     return <Navigate to="/" replace={true} />;
   }
-  console.log(typeof response);
   return (
     <Box color="black">
       {response === 201 ? (

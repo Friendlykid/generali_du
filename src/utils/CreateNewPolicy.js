@@ -24,7 +24,6 @@ export default async function createNewPolicy(
 
     if (response.ok) {
       const responseData = await response.json();
-      console.log(responseData);
       return response.status;
     } else {
       console.error("Failed to create new policy:", response.statusText);

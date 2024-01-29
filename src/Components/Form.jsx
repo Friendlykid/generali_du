@@ -2,20 +2,19 @@ import { Button, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import Input from "./Input";
 import SelectInput from "./SelectInput";
-import createNewPolicy from "../utils/CreateNewPolicy";
 import { Navigate } from "react-router-dom";
 
-export default function Form({ response, setResponse }) {
+export default function Form({ newPolicy }) {
   const [insuranceType, setInsuranceType] = useState("");
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [policyNumber, setPolicyNumber] = useState("");
+
   async function handleClick() {
-    const status = await createNewPolicy();
-    setResponse(status);
+    newPolicy.mutate(insuranceType, name, surname, policyNumber);
   }
 
-  if (response !== "preparing") {
+  if (newPolicy.isSuccess) {
     return <Navigate to="/response" replace={true} />;
   }
 

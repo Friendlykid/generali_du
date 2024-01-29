@@ -1,10 +1,15 @@
-import { Box, Popover, Stack, SvgIcon, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, Popover, Stack, SvgIcon } from "@mui/material";
+import { useState } from "react";
 import getInsuranceTypes from "../utils/GetInsuranceTypes";
+import { useQuery } from "@tanstack/react-query";
 
 export default function SelectInput({ selected, setSelected }) {
-  const [insuranceTypes, setInsuranceTypes] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const insuranceTypesQuery = useQuery({
+    queryKey: ["insuranceTypes"],
+    queryFn: getInsuranceTypes,
+  });
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -18,25 +23,6 @@ export default function SelectInput({ selected, setSelected }) {
     setAnchorEl(null);
   };
 
-  useEffect(() => {
-    let isOver = false;
-    const fetchData = async () => {
-      try {
-        const types = await getInsuranceTypes();
-        if (!isOver) {
-          setInsuranceTypes(types);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-
-    return () => {
-      isOver = true;
-    };
-  }, []);
   return (
     <>
       <div onClick={handleClick}>
@@ -83,25 +69,26 @@ export default function SelectInput({ selected, setSelected }) {
         sx={{ transform: "translateX(-2px)" }}
       >
         <Stack direction="column" width="100%" borderRadius={0}>
-          {insuranceTypes.map((type, i) => (
-            <div onClick={() => handleInsuranceClick(type)} key={type}>
-              <Box
-                border="2px solid black"
-                height="30px"
-                width="250px"
-                bgcolor="#f2f2f2"
-                sx={{
-                  "&:hover": {
-                    backgroundColor: "#ebebeb",
-                    cursor: "pointer",
-                  },
-                  textAlign: "center",
-                }}
-              >
-                {type}
-              </Box>
-            </div>
-          ))}
+          {insuranceTypesQuery.isFetched &&
+            insuranceTypesQuery.data.map((type) => (
+              <div onClick={() => handleInsuranceClick(type)} key={type}>
+                <Box
+                  border="2px solid black"
+                  height="30px"
+                  width="250px"
+                  bgcolor="#f2f2f2"
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "#ebebeb",
+                      cursor: "pointer",
+                    },
+                    textAlign: "center",
+                  }}
+                >
+                  {type}
+                </Box>
+              </div>
+            ))}
         </Stack>
       </Popover>
     </>
